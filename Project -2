@@ -1,0 +1,1311 @@
+  Online Contact Dairy
+  
+  count
+  
+  package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
+/**
+ * Servlet implementation class Count
+ */
+public class Count extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Count() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
+		PrintWriter out=response.getWriter();
+		
+		SessionFactory sf = new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+		  Session s = sf.openSession();
+		  s.beginTransaction();
+		  
+		 
+		  Query q=s.createQuery("select count(*) from Employee");
+			
+			Object count=q.getSingleResult();
+			
+			
+		  s.getTransaction().commit();
+		  
+		  s.close();
+		  sf.close();
+		  
+		  out.print("Total Records : "+count); 
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ctl insert
+
+package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class CtlInsert
+ */
+public class CtlInsert extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CtlInsert() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
+PrintWriter out=response.getWriter();
+		
+		
+		response.setContentType("text/html");
+		
+		String contactname=request.getParameter("nm");	
+		int contactno=Integer.parseInt(request.getParameter("cn"));
+	
+	
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+			
+
+			Session s=sf.openSession();
+			
+			s.beginTransaction();
+			
+			Employee a=new Employee();
+		
+		
+			a.setContactname(contactname);
+			a.setContactno(contactno);
+	
+			s.save(a);
+			
+			s.getTransaction().commit();
+			
+			s.close();
+			sf.close();
+		
+			out.print("<h4>Contact saved...</h4>");
+	}
+
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+DeleteDetails
+
+package pac1;
+
+import java.io.IOException;
+import org.hibernate.query.Query;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class DeleteDetails
+ */
+public class DeleteDetails extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+
+		PrintWriter out=response.getWriter();
+			
+			response.setContentType("text/html");
+			
+			
+			
+			String contactname=request.getParameter("nm");	
+			
+			
+			
+
+			SessionFactory sf=new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+				
+
+				Session s=sf.openSession();
+				
+				
+			
+				s.beginTransaction();
+				
+				Employee d=new Employee();
+			
+			d.setContactname(contactname);
+				
+			
+			
+		    
+	        //delete a specific record
+	        Query q= s.createQuery("delete from Employee where contactname='"+contactname+"'");
+	       
+		     q.executeUpdate();
+				
+				s.getTransaction().commit();
+				sf.close();
+			
+				out.print("<h4>Contact deleted...</h4>");
+	}
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+class
+
+package pac1;
+
+import javax.persistence.Entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Employee")
+public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	
+	int userid;
+	String username;
+	String contactname;
+	int contactno;
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getContactname() {
+		return contactname;
+	}
+	public void setContactname(String contactname) {
+		this.contactname = contactname;
+	}
+	public int getContactno() {
+		return contactno;
+	}
+	public void setContactno(int contactno) {
+		this.contactno = contactno;
+	}
+	public Employee(int userid, String username, String contactname, int contactno) {
+		super();
+		this.userid = userid;
+		this.username = username;
+		this.contactname = contactname;
+		this.contactno = contactno;
+	}
+	public Employee() {
+		super();
+	}
+	
+	
+	
+	
+	
+
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+search
+
+package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class search
+ */
+public class search extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public search() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		PrintWriter out=response.getWriter();
+		
+		String contactname=request.getParameter("cn");
+		
+		response.setContentType("text/html");
+		
+		
+		
+		
+
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+			
+
+			Session s=sf.openSession();
+			
+			
+		
+			s.beginTransaction();
+
+			Query q=s.createQuery("from Employee where contactname='"+contactname+"'");
+			
+			List <Employee> l=q.getResultList();
+			out.print("<table border=3><caption>All Records</caption><tr><th>Name</th><th>Contact no</th></tr>");
+			
+			for (Employee emp : l)
+			{
+			
+				out.print("<tr><td>"+emp.getContactname()+"</td>"+"<td>"+emp.getContactno()+"</td></tr>");
+		
+				
+				
+				
+			}
+			out.print("</table>");
+		
+			
+			sf.close();
+			s.close();
+		
+			
+	}
+
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Servlet1
+
+package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class Servlet1
+ */
+public class Servlet1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+	
+		
+		
+		String username=request.getParameter("un");	
+		String password=request.getParameter("pw");	
+	
+	
+		
+		
+		
+		
+
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(SignUp.class).buildSessionFactory();
+			
+
+			Session s=sf.openSession();
+			
+			
+		
+			s.beginTransaction();
+			
+			
+		
+			
+			SignUp a=new SignUp();
+		
+			
+			a.setUsername(username);
+			a.setPassword(password);
+	
+			s.save(a);
+			
+			
+			
+			s.getTransaction().commit();
+			sf.close();
+		
+		
+		 
+     out.print("<h1>Registration Successfull</h1>");
+			
+			
+			RequestDispatcher rd=request.getRequestDispatcher("SignUpForm.jsp");
+           rd.include(request, response);
+			
+			
+	}
+
+		
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+show
+
+package pac1;
+
+import java.io.IOException;
+
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import javax.persistence.Query;
+import java.util.List;
+
+/**
+ * Servlet implementation class Show
+ */
+public class Show extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Show() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	
+	
+		PrintWriter out=response.getWriter();
+		
+		
+		response.setContentType("text/html");
+		
+		
+		
+		
+
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+			
+
+			Session s=sf.openSession();
+			
+			
+		
+			s.beginTransaction();
+
+			Query q=s.createQuery("from Employee");
+			
+			List <Employee> l=q.getResultList();
+			out.print("<table border=3><caption>All Records</caption><tr><th>Name</th><th>Contact no</th></tr>");
+			
+			for (Employee emp : l)
+			{
+			
+				out.print("<tr><td>"+emp.getContactname()+"</td>"+"<td>"+emp.getContactno()+"</td></tr>");
+		
+				
+				
+				
+			}
+			out.print("</table>");
+		
+			
+			sf.close();
+			s.close();
+		
+			
+	}
+
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Signin records
+
+package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class SignInRecords
+ */
+public class SignInRecords extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SignInRecords() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out=response.getWriter();
+		
+		String username=request.getParameter("u");
+		String password=request.getParameter("p");
+		
+		out.print("Welcome "+username);
+		
+		out.print("<hr>");
+		
+		RequestDispatcher rd=request.getRequestDispatcher("link.jsp");
+		rd.include(request, response);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+signup class
+
+package pac1;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Signup")
+public class SignUp {
+	
+	@Id
+	String username;
+	String password;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public SignUp(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+	public SignUp() {
+		super();
+	}
+	
+	
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+SortRecords
+
+package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class SortRecords
+ */
+public class SortRecords extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SortRecords() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+
+		PrintWriter out=response.getWriter();
+		
+		
+		response.setContentType("text/html");
+		
+		
+		
+		
+
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+			
+
+			Session s=sf.openSession();
+			
+			
+		
+			s.beginTransaction();
+
+			Query q=s.createQuery("from Employee order by contactname asc");
+			
+			List <Employee> l=q.getResultList();
+			out.print("<table border=3><caption>All Records</caption><tr><th>Name</th><th>Contact no</th></tr>");
+			
+			for (Employee emp : l)
+			{
+			
+				out.print("<tr><td>"+emp.getContactname()+"</td>"+"<td>"+emp.getContactno()+"</td></tr>");
+		
+				
+				
+				
+			}
+			out.print("</table>");
+		
+			
+			sf.close();
+			s.close();
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Update
+
+package pac1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.engine.spi.ExecuteUpdateResultCheckStyle;
+
+
+/**
+ * Servlet implementation class UpdateDetails
+ */
+public class UpdateDetails extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateDetails() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		PrintWriter out=response.getWriter();
+		
+		
+		String contactname=request.getParameter("nm");	
+		//String contactno=request.getParameter("cn");	
+		
+		
+		int contactno=Integer.parseInt(request.getParameter("cn"));
+	
+		
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Employee.class).buildSessionFactory();
+				
+				
+				
+	Session s=sf.openSession();
+
+     s.beginTransaction();
+  
+     
+
+     Employee a=new Employee();
+   a.setContactname(contactname);
+     a.setContactno(contactno);
+     
+     
+
+     
+     
+     Query q= s.createQuery("update Employee set contactno="+contactno+" where contactname='"+contactname+"'");
+     
+     q.executeUpdate();
+     out.print("<h2>Records Updated...</h2>");
+
+           
+             s.getTransaction().commit();
+
+
+            s.close();
+            sf.close();
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+cfg
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">system</property>
+    </session-factory>
+</hibernate-configuration>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+addcontact.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body style="color: blue">
+<form action="CtlInsert" method="get">
+Name :  <input type="text" name="nm"><br>
+Contact No : <input type="number" name="cn"><br>
+<input type="submit" value="Add Contact">
+</form>
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+countrec.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Count" method="get">
+<input type="submit" value="Count">
+
+</form>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+deletecontact.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="DeleteDetails" method="get">
+Enter name <input type="text" name="nm">
+<input type="submit" value="Delete Contact">
+</form>
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+footer.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h2 style="color: blue;margin-left: 400px">Website Created By : Josephine</h2>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+header.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1 style="color: red;margin-left: 300px">Online Contact Dairy</h1>
+</body>
+</html>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+index.jsp
+
+<html>
+<head>
+<style>
+a:hover
+
+{
+ 
+ background-color: yellow;
+
+
+}
+.c1
+{
+
+color: black;
+
+
+
+
+}
+
+h3
+{
+
+ color: blue;
+
+
+}
+
+
+</style>
+
+</head>
+<body>
+<jsp:include page="header.jsp"></jsp:include>
+
+<img src="https://us.123rf.com/450wm/artursfoto/artursfoto1810/artursfoto181000077/110253528-pen-on-a-self-made-planner-modern-office-desk-working-writing-concept.jpg?ver=6" height="210px" width="210px">
+<br>
+
+
+
+<hr>
+
+
+
+
+
+<a href="SignUpForm.jsp">SignUp</a>
+<a href="SignIn.jsp">SignIn</a>
+
+
+
+
+
+
+<hr>
+
+<h1 class="c1">Online Contact Dairy</h1>
+
+<p>Online contact dairy is an Application which maintains personal contacts only</p>
+<hr>
+
+
+
+
+
+
+
+
+
+<jsp:include page="footer.jsp"></jsp:include>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+link.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+a
+{
+    padding: 10px;
+}
+
+a:hover 
+{
+
+	background-color: cyan;
+	color: red;
+}
+</style>
+</head>
+<body>
+
+<a href="addcontact.jsp">Add Contact</a>
+<a href="updatecontact.jsp">Update Contact</a>
+<a href="showcontact.jsp">Show Contact</a>
+<a href="deletecontact.jsp">Delete Contact</a>
+<a href="Searchbyname.jsp">Search Contact</a>
+<a href="Countrec.jsp">Count Contact</a>
+<a href="sortByAlphabet.jsp">Sort Contact</a>
+<img src="https://image.shutterstock.com/image-vector/contacts-diary-color-vector-icon-260nw-1826759675.jpg" height="210px" width="210px" style="float: left">
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+searchbyname.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="search" method="get">
+ Name : <input type="text" name="cn"> 
+<input type="submit" value="Submit">
+
+</form>
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+showcontact.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Show" method="get">
+<input type="submit" value="Show Details">
+</form>
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+signin.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="SignInRecords" method="get">
+Username : <input type="text" name="u">
+Password : <input type="password" name="p">
+<input type="submit" value="SignIn">
+</form>
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+signup.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+table
+{
+   margin-left: 380px
+}
+
+
+td
+
+{
+  background: white;
+
+}
+body
+{
+   background-image: url("https://i.pinimg.com/originals/4b/98/e9/4b98e92a9e0cc2ced4d1d2f51b54b427.jpg");
+   
+   
+}
+
+</style>
+</head>
+<body>
+
+<h1 style="color: red;margin-left: 200px">Online Contact Dairy</h1>
+
+<hr>
+<form action="Servlet1" method="get">
+<table border="4">
+<caption>User Registration</caption>
+
+
+
+<tr>
+  <td>Username</td> 
+  <td><input type="text" name="un" required"></td>
+</tr>
+
+<tr>
+
+<td>Password</td> 
+
+<td><input type="password" name="pw" required></td>
+</tr>
+
+<tr>
+
+<td colspan="2"><input type="submit" value="SignUp"></td>
+
+</tr>
+</table>
+
+
+
+</form>
+
+<hr>
+<h2 style="color: blue;margin-left: 400px;">Website Created By : Josephine</h2>
+
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+sortbyname.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="SortRecords" method="get">
+<input type="submit" value="Submit">
+
+</form>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+updatecontact.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="UpdateDetails" method="get">
+Name <input type="text" name="nm">
+Contact no <input type="number" name="cn">
+<input type="submit" value="Update Contact">
+
+</form>
+</body> 
+</html>
+==================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+C
