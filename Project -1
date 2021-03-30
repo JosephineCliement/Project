@@ -1,0 +1,1642 @@
+home.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+body
+{
+  background-color: yellow;
+
+}
+
+
+</style>
+</head>
+<body>
+<header>
+
+<h1>Online Result Managemaent System</h1>
+<hr>
+</header>
+
+<a href="AdminRegister.jsp">AdminRegister</a>
+<a href="AdminLogin.jsp">AdminLogin</a>
+
+
+<footer><h2>Created By: Josephine</h2></footer>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+AdminRegister.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="register" method="get">
+Username : <input type="text" name="un"><br>
+Password : <input type="password" name="p1"><br>
+ Confirm Password : <input type="password" name="p2"><br>
+<input type="submit" value="SignUp"><br>
+
+</form>
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+AdminLogin.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="login" method="get">
+Username : <input type="text" name="un"><br>
+Password : <input type="password" name="pw"><br>
+
+<input type="submit" value="Login"><br>
+
+</form>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+create.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+
+body
+{
+  
+  background-color: cyan;
+
+}
+
+
+</style>
+</head>
+<body>
+
+<header>
+
+<h1>Online Result Managemaent System</h1>
+
+</header>
+<hr>
+
+<h1 style="color: black">Records of Student</h1>
+<form action="Servlet1" method="get"><br>
+Student rollno : <input type="number" name="rollno" required><br>
+Student name : <input type="text" name="name" placeholder="write your name here"><br>
+Maths : <input type="number" name="marks1" onfocus="fun1(this)"><br>
+English: <input type="number" name="marks2" onblur="fun2(this)"><br>
+Marathi : <input type="number" name="marks3"onfocus="fun1(this)"><br>
+Science : <input type="number" name="marks4" onblur="fun2(this)"><br>
+History : <input type="number" name="marks5" onfocus="fun1(this)"><br>
+
+<input type="submit" value="Submit">
+
+</form>
+<script>
+
+ 
+
+function fun1(v)
+{
+    v.style.backgroundColor="yellow";
+}
+
+ 
+
+function fun2(m)
+{
+    m.style.backgroundColor="pink";
+}
+
+ 
+
+</script>
+<footer><h2>Created By: Josephine</h2></footer>
+
+</body>
+</html>
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+deleteSpecific.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Delete1" method="get">
+Rollno : <input type="number" name="rollno">
+
+<input type="submit" value="Specific Delete">
+
+</form>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+failed.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Login Failed</h1>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+search.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Servlet3" method="get">
+Rollno : <input type="number" name="rollno">
+<input type="submit" value="Search">
+
+</form>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+sucess.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<style>
+
+body
+{
+  background-color: pink;
+ 
+
+}
+a
+{
+
+   padding: 5px;
+
+}
+
+a:hover {
+	color: black;
+}
+
+img
+{
+
+   float: right;
+   height: 400px;
+   width: 400px
+  }
+  
+  
+
+</style>
+</head>
+<body>
+<img src="data:image/jpeg;base64,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">
+<h1>Login Successful</h1>
+<a href="create.jsp">Student Entry Form</a><br>
+<br>
+<a href="search.jsp">Specific Records</a><br>
+<br>
+<a href="Servlet2">Display all records</a><br>
+<br>
+<a href="Servlet4">Descending </a><br>
+<br>
+<a href="Servlet5">Ascending </a><br>
+<br>
+<a href="update.jsp">Update </a><br>
+<br>
+<a href="DeleteSpecific.jsp">Delete Records </a><br>
+<br>
+<a href="CountRecords.jsp">Count All Records</a><br>
+<br>
+<a href="PassedStudents">Count Records Who Got above 40%</a><br>
+<br>
+<a href="FailedStudents">Count Records Who Got less than 40%</a><br>
+<br>
+<a href="Above90">Display Student Records Who Got above 90%</a><br>
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+update.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="UpdateRecords" method="get">
+Rollno : <input type="number" name="rollno">
+Name : <input type="text" name="nm">
+<input type="submit" value="Update">
+
+</form>
+</body>
+</html>
+=========================================================================================================================================================================
+Servlet1
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet1
+ */
+public class Servlet1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter pr = response.getWriter();
+		
+		
+		pr.println("<h1>Online Result Managemaent System</h1>");
+		
+		pr.println("<hr>");
+		Connection cn;
+		Statement smt;
+		
+		try {
+			 Class.forName("oracle.jdbc.driver.OracleDriver"); 
+			 
+		cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root"); 
+		
+		smt=cn.createStatement();
+		
+	
+		
+		String rollno=request.getParameter("rollno");
+		String name=request.getParameter("name");
+		
+		String Maths=request.getParameter("marks1");
+		String English=request.getParameter("marks2");
+		String Marathi=request.getParameter("marks3");
+		String Science=request.getParameter("marks4");
+		String History=request.getParameter("marks5");
+
+
+	
+		
+	
+		
+		
+		String query="insert into  Stu(rollno,name, Maths,  English, Marathi,  Science,History ) values("+rollno+",'"+name+"',"+Maths+","+English+","+Marathi+","+Science+","+History+")";
+	    
+		smt.executeUpdate(query);
+		response.getWriter().print("Record inserted.....");
+		
+		smt.close();
+		cn.commit();
+		cn.close();
+		
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		pr.println("<h2>Created By: Josephine</h2>");
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Servlet2
+
+package pro1;
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet2
+ */
+public class Servlet2 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet2() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		 PrintWriter out= response.getWriter();
+		 
+	out.print("<header><h1>Online Result Management System</h1></header>");
+	       
+	        try {
+	            Class.forName("oracle.jdbc.driver.OracleDriver");
+	           
+	        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+	           
+	            Statement st = c.createStatement();
+	           
+	            String query ="select * from Stu";
+	           
+	            ResultSet rs = st.executeQuery(query);
+	            
+	            out.print("<h3>Records of Students</h3>");
+	            out.print("<table border='2'><tr><th>Rollno</th><th>Name</th><th>Maths</th><th>English</th><th>Marathi</th><th>Science</th><th>History</th><th>Percentage</th></tr>");
+	           
+	            while(rs.next())
+	            {
+	            	
+	            	out.print("<tr><td>");
+	            	out.print(rs.getInt(1));
+	            	out.print("</td>");
+	            	out.print("<td>");
+	            	out.print(rs.getString(2));
+	            	out.print("</td>");
+	            	out.print("<td>");
+	            	out.print(rs.getInt(3));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(4));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(5));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(6));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(7));
+	            	out.print("</td>");
+	            	
+
+	            	out.print("<td>");
+	            	out.print(rs.getInt(8));
+	            	out.print("</td>");
+	            	
+	            	out.print("</tr>");
+	            	
+	            	
+	            	
+	 
+	            }
+	            out.print("</table>");
+	        
+	            
+	            out.print("<footer><h2>Created By : Josephine</h2></footer>");
+	        }
+	       
+	        catch(Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	        
+	     
+	       
+	    }
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Servlet3
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet3
+ */
+public class Servlet3 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet3() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
+		 PrintWriter out= response.getWriter();
+		 
+			
+	       
+	        try {
+	            Class.forName("oracle.jdbc.driver.OracleDriver");
+	           
+	        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+	           
+	            Statement st = c.createStatement();
+	            
+
+	    		
+	    		String rollno=request.getParameter("rollno");
+	    		
+	    	
+	 
+	            String query ="select * from Stu where rollno="+rollno+"";
+	           
+	            ResultSet rs = st.executeQuery(query);
+	            
+	            out.print("<table border='2'><tr><th>Rollno</th><th>Name</th><th>Maths</th><th>English</th><th>Marathi</th><th>Science</th><th>History</th><th>Percentage</th></tr>");
+	            while(rs.next())
+	            {
+	            	
+	            	out.print("<tr><td>");
+	            	out.print(rs.getInt(1));
+	            	out.print("</td>");
+	            	out.print("<td>");
+	            	out.print(rs.getString(2));
+	            	out.print("</td>");
+	            	out.print("<td>");
+	            	out.print(rs.getInt(3));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(4));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(5));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(6));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(7));
+	            	out.print("</td>");
+	            	
+
+	            	out.print("<td>");
+	            	out.print(rs.getInt(8));
+	            	out.print("</td>");
+	            	
+	            	out.print("</tr>");
+	            	
+	            	
+	          
+	           
+	          
+	            }
+	            
+	            out.print("</table>");
+	        }
+	       
+	        catch(Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	       
+	    }
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Servlet 4
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet4
+ */
+public class Servlet4 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet4() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		
+		response.setContentType("text/html");
+	       
+        PrintWriter out=response.getWriter();
+       
+        try {
+           
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+       
+        Connection cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+       
+        Statement smt = cn.createStatement();
+       
+        String query="select * from Stu ORDER BY Percentage DESC";
+       
+        ResultSet rs = smt.executeQuery(query);
+       
+        out.print("<table border=4>");
+       
+        out.print("<caption>Records Percentage wise in Descending order</caption>");
+       
+        out.print("<tr><th>Name</th><th>RollNo</th><th>Percentage</th</tr>");
+       
+        while(rs.next())
+        {
+        out.print("<tr><td>"+rs.getString(1)+" </td><td> "+rs.getString(2)+" </td><td> "+rs.getInt(8)+"%</td></tr>");
+        }
+       
+        out.print("</table>");
+       
+        rs.close();
+       
+        smt.close();
+       
+        cn.commit();
+       
+        cn.close();
+       
+        } catch (ClassNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+       
+    }
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Servlet5
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Servlet5
+ */
+public class Servlet5 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Servlet5() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+
+		response.setContentType("text/html");
+	       
+        PrintWriter out=response.getWriter();
+       
+        try {
+           
+        Class.forName("oracle.jdbc.driver.OracleDriver");
+       
+        Connection cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+       
+        Statement smt = cn.createStatement();
+       
+        String query="select * from Stu ORDER BY name ASC";
+       
+        ResultSet rs = smt.executeQuery(query);
+       
+        out.print("<table border=5>");
+       
+        out.print("<caption>Records Name wise in Ascending order</caption>");
+       
+        out.print("<tr><th>Rollno</th><th>Name</th><th>Percentage</th</tr>");
+       
+        while(rs.next())
+        {
+        out.print("<tr><td>"+rs.getString(1)+" </td><td> "+rs.getString(2)+" </td><td> "+rs.getInt(8)+"%</td></tr>");
+        }
+       
+        out.print("</table>");
+       
+        rs.close();
+       
+        smt.close();
+       
+        cn.commit();
+       
+        cn.close();
+       
+        } catch (ClassNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+       
+    }
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+update
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UpdateRecords
+ */
+public class UpdateRecords extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UpdateRecords() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		 PrintWriter out= response.getWriter();
+		 
+			
+	       
+	        try {
+	            Class.forName("oracle.jdbc.driver.OracleDriver");
+	           
+	        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+	           
+	            Statement st = c.createStatement();
+	            
+
+	    		
+	    		String rollno=request.getParameter("rollno");
+	    		String name=request.getParameter("nm");
+	    		
+	    
+	 
+	            String query ="update Stu  set name='"+name+"' where rollno="+rollno+"";
+	           
+	    		response.getWriter().print("Record updated.....");
+	    		
+	    		ResultSet rs = st.executeQuery(query);
+	    		
+	    	
+	            
+	            while(rs.next())
+	            {
+	            	
+	            
+	            	out.print(rs.getInt(1));
+	            
+	         
+	            	out.print(rs.getString(2));
+	            
+	            	
+	 
+	          
+	            }
+	            
+	          
+	            
+	            
+	        }
+	       
+	        catch(Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	       
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+above 90
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Above90
+ */
+public class Above90 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Above90() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		PrintWriter out= response.getWriter();
+
+		try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+		Statement st = c.createStatement();
+		String query ="select rollno,name,Maths,English,Marathi,Science,History,max(Percentage)as total_per from Stu group by rollno,name,Maths,English,Marathi,Science,History having max(Percentage)>90";
+		ResultSet rs = st.executeQuery(query);
+
+		out.print("<table border=2><tr><th>rollno</th><th>name</th><th>Maths</th><th>English</th><th>Marathi</th><th>Science</th><th>History</th><th>Percentage</th></tr>");
+		while(rs.next())
+		{
+		out.print("<tr><td>");
+		out.print(rs.getInt(1));
+		out.print("</td>");
+		out.print("<td>");
+		out.print(rs.getString(2));
+		out.print("</td>");
+		out.print("<td>");
+		out.print(rs.getInt(3));
+		out.print("</td>");
+		out.print("<td>");
+		out.print(rs.getInt(4));
+		out.print("</td>");
+		out.print("<td>");
+		out.print(rs.getInt(5));
+		out.print("</td>");
+		out.print("<td>");
+		out.print(rs.getInt(6));
+		out.print("</td>");
+		out.print("<td>");
+		out.print(rs.getInt(7));
+		out.print("</td>");
+
+
+		 out.print("<td>");
+		out.print(rs.getInt(8));
+		out.print("</td>");
+		out.print("</tr>");
+
+
+		}
+		out.print("</table>");
+		} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+
+		}
+
+		}
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+count
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Count
+ */
+public class Count extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Count() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 PrintWriter out= response.getWriter();
+		 
+		
+	       
+	        try {
+	            Class.forName("oracle.jdbc.driver.OracleDriver");
+	           
+	        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+	           
+	            Statement st = c.createStatement();
+	           
+	       
+	            String query ="select count(*) AS Total_Records from Stu";
+	           
+	            ResultSet rs = st.executeQuery(query);
+	            
+	            
+	            out.print("<h1>Online Result Management System</h1>");
+	            out.print("<h2>Total Records</h2>");
+	            out.print("<table border='3'><tr><th>Count Record</th></tr>");
+	           
+	            
+	            while(rs.next())
+	            {
+	            	
+	            	out.print("<tr><td>");
+	            	out.print(rs.getInt(1));
+	            	out.print("</td>");
+	            	out.print("<td>");
+	            	out.print(rs.getString(2));
+	            	out.print("</td>");
+	            	out.print("<td>");
+	            	out.print(rs.getInt(3));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(4));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(5));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(6));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(7));
+	            	out.print("</td>");
+	            	
+	            	out.print("<td>");
+	            	out.print(rs.getInt(8));
+	            	out.print("</td>");
+	            	
+	            	out.print("</tr>");
+	            	
+	            	
+	            	
+	 
+	            }
+	            out.print("</table>");
+	           
+	        
+	            out.print("<h2>Created By : Josephine</h2>");
+	          
+	        }
+	        
+	       
+	        catch(Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	       
+	        
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class Delete1
+ */
+public class Delete1 extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Delete1() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		 PrintWriter out= response.getWriter();
+		 
+			
+	       
+	        try {
+	            Class.forName("oracle.jdbc.driver.OracleDriver");
+	           
+	        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+	           
+	            Statement st = c.createStatement();
+	            
+
+	    		
+	    		String rollno=request.getParameter("rollno");
+	    		
+	    
+	 
+	            String query ="delete  from Stu where rollno="+rollno+"";
+	           
+	            ResultSet rs = st.executeQuery(query);
+	            
+	            
+	            out.print("Specific Records deleted....");
+	            
+	         
+	            
+	         
+	        }
+	       
+	        catch(Exception e)
+	        {
+	            e.printStackTrace();
+	        }
+	       
+	    }
+	
+		
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class FailedStudents
+ */
+public class FailedStudents extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FailedStudents() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+
+		 PrintWriter out= response.getWriter();
+		 
+			out.print("<header><h1>Online Result Management System</h1></header>");
+			
+			
+			       
+			      
+			
+			 try {
+		            Class.forName("oracle.jdbc.driver.OracleDriver");
+		           
+		        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+		           
+		            Statement st = c.createStatement();
+		           
+		         
+		            
+		         String query ="select count(*) As Total_Records from Stu where percentage <= 40";
+		           
+		            ResultSet rs = st.executeQuery(query);
+		            
+		            out.print("<h3>Failed Students</h3>");
+		            out.print("<table border='2'><tr><th>Records who got less than 40% </th></tr>");
+		           
+		            while(rs.next())
+		            {
+		            	
+		            	out.print("<tr><td>");
+		            	out.print(rs.getInt(1));
+		            	out.print("</td>");
+		            	out.print("<td>");
+		            	out.print(rs.getString(2));
+		            	out.print("</td>");
+		            	out.print("<td>");
+		            	out.print(rs.getInt(3));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(4));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(5));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(6));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(7));
+		            	out.print("</td>");
+		            	
+
+		            	out.print("<td>");
+		            	out.print(rs.getInt(8));
+		            	out.print("</td>");
+		            	
+		            	out.print("</tr>");
+		            	
+		            	
+		            	
+		 
+		            }
+		            out.print("</table>");
+		        
+		            
+		            out.print("<footer><h2>Created By : Josephine</h2></footer>");
+		        }
+		       
+		        catch(Exception e)
+		        {
+		            e.printStackTrace();
+		        }
+		        
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+login
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class login
+ */
+public class login extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public login() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
+		PrintWriter out=response.getWriter();
+		response.setContentType("text/html");
+		String username=request.getParameter("un");
+		String password=request.getParameter("pw");
+		
+		if(username.equals("abcd")&&password.equals("1234"))
+		{
+			
+			RequestDispatcher rd=request.getRequestDispatcher("sucess.jsp");
+			rd.include(request, response);
+		}
+		else
+		{
+		
+			RequestDispatcher rd=request.getRequestDispatcher("failed.jsp");
+			rd.include(request, response);
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+passedStudent
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class PassedStudents
+ */
+public class PassedStudents extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public PassedStudents() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		 PrintWriter out= response.getWriter();
+		 
+			out.print("<header><h1>Online Result Management System</h1></header>");
+			
+			
+			       
+			      
+			
+			 try {
+		            Class.forName("oracle.jdbc.driver.OracleDriver");
+		           
+		        Connection c=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
+		           
+		            Statement st = c.createStatement();
+		           
+		         
+		            
+		         String query ="select count(*) As Total_Records from Stu where percentage >= 40";
+		           
+		            ResultSet rs = st.executeQuery(query);
+		            
+		            out.print("<h3>Passed Students</h3>");
+		            out.print("<table border='2'><tr><th>Records who got above 40% </th></tr>");
+		           
+		            while(rs.next())
+		            {
+		            	
+		            	out.print("<tr><td>");
+		            	out.print(rs.getInt(1));
+		            	out.print("</td>");
+		            	out.print("<td>");
+		            	out.print(rs.getString(2));
+		            	out.print("</td>");
+		            	out.print("<td>");
+		            	out.print(rs.getInt(3));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(4));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(5));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(6));
+		            	out.print("</td>");
+		            	
+		            	out.print("<td>");
+		            	out.print(rs.getInt(7));
+		            	out.print("</td>");
+		            	
+
+		            	out.print("<td>");
+		            	out.print(rs.getInt(8));
+		            	out.print("</td>");
+		            	
+		            	out.print("</tr>");
+		            	
+		            	
+		            	
+		 
+		            }
+		            out.print("</table>");
+		        
+		            
+		            out.print("<footer><h2>Created By : Josephine</h2></footer>");
+		        }
+		       
+		        catch(Exception e)
+		        {
+		            e.printStackTrace();
+		        }
+		        
+			     
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+register
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class register
+ */
+public class register extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public register() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		response.setContentType("text/html");
+		PrintWriter pr = response.getWriter();
+		
+		
+		pr.println("<h1>Online Result Managemaent System</h1>");
+		
+		pr.println("<hr>");
+		Connection cn;
+		Statement smt;
+		
+		try {
+			 Class.forName("oracle.jdbc.driver.OracleDriver"); 
+			 
+		cn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root"); 
+		
+		smt=cn.createStatement();
+		
+	
+		
+		String username=request.getParameter("un");
+		String password1=request.getParameter("p1");
+		
+		String password2=request.getParameter("p2");
+		
+	if(password1.equals(password2))
+			{
+		      String query="insert into register values('"+username+"',"+password1+")";
+	
+		      
+				smt.executeUpdate(query);
+				response.getWriter().print("Record inserted.....");
+				
+				smt.close();
+				cn.commit();
+				cn.close();
+				
+			}
+	
+	else
+	{
+		pr.print("Not Saved");
+	}
+		
+	
+		
+	
+		
+
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		pr.println("<h2>Created By: Josephine</h2>");
+		
+		
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+=======================================================================================================================================================================
+
+
+
+
+
