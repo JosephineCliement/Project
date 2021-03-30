@@ -1,0 +1,890 @@
+Customer Management App
+
+index.jsp
+
+<html>
+<head>
+<style>
+
+
+a
+{
+
+ padding: 20px;
+ 
+   
+   
+}
+input
+{
+ margin-left: 400px;
+
+}
+
+</style>
+</head>
+<body>
+<h1 style="color: red;margin-left: 300px">Customer Management App</h1>
+<hr>
+<a href="addcustomer.jsp">Add Customer</a>
+<a href="Show.jsp">Show Customer</a>
+<a href="updatecustomer.jsp">Update Customer</a>
+<a href="CountRecords">Count Records</a>
+<a href="recSort">Sort</a>
+
+<a href="deletecustomer.jsp"> Delete Customer</a>
+
+<h2 style="margin-left: 350px">Customer Records</h2>
+<form action="Select" method="get">
+<input type="submit" value="Submit" >
+
+</form>
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQg8iZ3wgX1jI88FMFp3DOY70TH5O93-Sw2mg&usqp=CAU">
+<hr>
+
+<hr>
+
+<h2  style="color: red;margin-left: 300px">Website created by : Josephine</h2>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+addcustomer.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Insert" method="get">
+Customer Id : <input type="number" name="id"><br>
+Customer Name : <input type="text" name="nm"><br>
+Customer City : <input type="text" name="cy"><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+deletecustomer.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Delete" method="get">
+ID: <input type="number" name="id">
+<input type="submit" value="Submit">
+
+</form>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+show.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Select" method="get">
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+updatecustomer.jsp
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="Update" method="get">
+
+Name : <input type="text" name="nm">
+City : <input type="text" name="cy">
+<input type="submit" value="Submit">
+
+</form>
+</body>
+</html>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+cfg
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+    <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+        <property name="hibernate.connection.username">system</property>
+    </session-factory>
+</hibernate-configuration>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+countrecords
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+/**
+ * Servlet implementation class CountRecords
+ */
+public class CountRecords extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CountRecords() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		PrintWriter out=response.getWriter();
+		
+	SessionFactory sf=new Configuration().configure().addAnnotatedClass(Customer.class).buildSessionFactory();
+		
+		Session s=sf.openSession();
+		
+		s.beginTransaction();
+		
+		Query q=s.createQuery("select count(*) from Customer");
+		Object count= q.getSingleResult();
+			
+		s.close();
+		sf.close();
+		out.print("Total records : "+count);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+customer class
+
+package pro1;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+
+public class Customer {
+	
+	@Id
+	int cid;
+	String cname;
+	String city;
+	
+	
+	public Customer() {
+		super();
+	}
+	public Customer(int cid, String cname, String city) {
+		super();
+		this.cid = cid;
+		this.cname = cname;
+		this.city = city;
+	}
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	@Override
+	public String toString() {
+		return "Customer [cid=" + cid + ", cname=" + cname + ", city=" + city + "]";
+	}
+	
+	
+	
+
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Delete
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+/**
+ * Servlet implementation class Delete
+ */
+public class Delete extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Delete() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
+		
+     response.setContentType("text/html");
+		
+	
+		
+	
+		PrintWriter out=response.getWriter();
+		
+		int cid=Integer.parseInt(request.getParameter("id"));
+		
+		
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Customer.class).buildSessionFactory();
+		
+		
+		
+		  Session s=sf.openSession();
+
+	             s.beginTransaction();
+
+
+	          Query q=s.createQuery("delete from  Customer where cid="+cid+"");
+
+	        q.executeUpdate();
+	        
+	        out.print("<h1>Records Deleted...</h1>");
+
+	    s.getTransaction().commit();
+
+
+	     s.close();
+	     sf.close();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+insert
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class Insert
+ */
+public class Insert extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Insert() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+response.setContentType("text/html");
+		
+	
+		
+	
+		PrintWriter out=response.getWriter();
+		
+		int cid=Integer.parseInt(request.getParameter("id"));
+		
+		
+		String cname=request.getParameter("nm");
+		
+		String city=request.getParameter("cy");
+		
+		
+	
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Customer.class).buildSessionFactory();
+		
+
+		
+		Session s=sf.openSession();
+		
+		
+	s.beginTransaction();
+
+	
+	Customer c1=new Customer();
+	
+	c1.setCid(cid);
+	c1.setCname(cname);
+	c1.setCity(city);
+	
+	s.save(c1);
+	
+	out.print("<h1>Records Inserted...</h1>");
+
+	s.getTransaction().commit();
+	s.close();
+	sf.close();
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+recsort
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+/**
+ * Servlet implementation class recSort
+ */
+public class recSort extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public recSort() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		
+		PrintWriter out=response.getWriter();
+		
+		
+SessionFactory sf=new Configuration().configure().addAnnotatedClass(Customer.class).buildSessionFactory();
+		
+		Session s=sf.openSession();
+		
+		s.beginTransaction();
+		
+		Query q=s.createQuery("from Customer order by cname desc");
+		
+		List<Customer> l=q.getResultList();
+		
+		//StringBuffer sb=new StringBuffer();
+		out.print("<table border=1>");
+	out.print("<tr><th>Customer Id</th><th>Customer name</th><th>City</th>");
+		
+		for (Customer customer : l)
+		{
+			out.print("<tr><td>"+customer.getCid()+"</td><td>"+customer.getCname()+"</td><td>"+customer.getCity()+"</td></tr>");
+		}
+		
+		out.print("</table>");
+		
+		s.close();
+		sf.close();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select
+
+package pro1;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.persistence.Query;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+
+
+/**
+ * Servlet implementation class Select
+ */
+public class Select extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Select() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+
+		
+		PrintWriter out=response.getWriter();
+		
+		
+		response.setContentType("text/html");
+		
+		
+		
+		
+
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Customer.class).buildSessionFactory();
+			
+
+			Session s=sf.openSession();
+			
+			
+		
+			s.beginTransaction();
+
+			Query q=s.createQuery("from Customer");
+			
+			List <Customer> l=q.getResultList();
+			out.print("<table border=3><caption>Customer Records</caption><tr><th>Customer Id</th><th>Customer Name</th><th>Customer City</th></tr>");
+			
+			for (Customer cus : l)
+			{
+			
+				out.print("<tr><td>"+cus.getCid()+"</td>"+"<td>"+cus.getCname()+"</td>"+"<td>"+cus.getCity()+"</td></tr>");
+		
+				
+				
+				
+			}
+			out.print("</table>");
+		
+			
+			sf.close();
+			s.close();
+		
+			
+	}
+
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+update
+
+package pro1;
+
+import java.io.IOException;
+
+import java.io.PrintWriter;
+
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
+
+/**
+ * Servlet implementation class Update
+ */
+public class Update extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Update() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html");
+				
+			
+				
+			
+				PrintWriter out=response.getWriter();
+				
+				
+				
+				
+				String cname=request.getParameter("nm");
+				
+				String city=request.getParameter("cy");
+
+		
+		SessionFactory sf=new Configuration().configure().addAnnotatedClass(Customer.class).buildSessionFactory();
+				
+				
+				
+	  Session s=sf.openSession();
+
+             s.beginTransaction();
+
+
+          Query q=s.createQuery("update Customer set cname='"+cname+"' where city='"+city+"'");
+
+        q.executeUpdate();
+
+    s.getTransaction().commit();
+
+
+     s.close();
+     sf.close();
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
+=====================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
